@@ -1,0 +1,21 @@
+# σFlow-PDE Configuration
+# ├─ H-Bar training engine defaults
+# └─ OSF pre-registration linkage
+# ⚠ osf_registration_url MUST be set before first training run
+
+osf_registration_url: ""  # ← Set after locking OSF Preregistration
+
+project:
+  name: sigmaflow-pde
+  version: 0.1.0
+
+training:
+  engine: hbar
+  default_epochs: 200
+  batch_size: 64
+  learning_rate: 0.001
+
+paths:
+  data: benchmark/
+  outputs: falsification/
+  models: models/

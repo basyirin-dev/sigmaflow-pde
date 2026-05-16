@@ -1,0 +1,38 @@
+{
+  "name": "σFlow-PDE: H-Bar Phase Engine for Compositional Neural Operators",
+  "version": "0.1.0",
+  "authors": ["Basyirin Amsyar bin Basri"],
+  "description": "A drop-in H-Bar training engine that escapes the σ-trap in neural PDE solvers via live σ/δ/α ODE integration, autonomous phase curriculum, and auto-falsification.",
+  "hypotheses": [
+    {
+      "id": "H1",
+      "statement": "Live σ/δ/α ODE integration during training escapes low-frequency spectral traps (σ-trap), enabling convergence to higher-frequency solution components compared to standard training.",
+      "falsification_criterion": "Mean relative L2 error on high-frequency holdout PDEs ≤ 5% worse than best-in-class baseline (FNO/DeepONet) after convergence."
+    },
+    {
+      "id": "H2",
+      "statement": "Autonomous phase curriculum adaptively schedules training phases based on spectral convergence diagnostics, reducing total training steps to convergence by ≥ 30% relative to fixed-schedule training.",
+      "falsification_criterion": "Training step reduction < 30% or final accuracy degradation > 2% relative to fixed-schedule baseline."
+    },
+    {
+      "id": "H3",
+      "statement": "Auto-falsification detects and rejects models that fail spectral consistency checks, ensuring 100% Falsifiability Quotient across 24-split PDE grammar benchmarks.",
+      "falsification_criterion": "Any trained model passes spectral consistency checks yet exhibits OOD relative L2 error > 15% on the holdout test set."
+    }
+  ],
+  "methodology": {
+    "framework": "H-Bar training dynamics with coupled σ (spectral density), δ (phase offset), α (learning rate adaptation) ODEs",
+    "backbones": ["FNO", "DeepONet", "PINNs"],
+    "benchmark": "24-split PDE grammar (advection, diffusion, Burger's, wave, elliptic, mixed PDE families)",
+    "splits": {
+      "in_distribution": 16,
+      "ood_horizon": 4,
+      "ood_coefficient": 2,
+      "ood_family": 2
+    },
+    "metrics": ["relative_L2", "spectral_energy_ratio", "falsifiability_quotient", "training_steps_to_convergence"]
+  },
+  "osf_registration_url": "",
+  "timestamp": "",
+  "status": "draft"
+}
